@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
+        
         VStack(spacing: 0) {
+       
             ZStack(alignment: .topTrailing) {
                 RoundedImage(url: URL(string: "https://picsum.photos/400"))
-                    .frame(height: 175)
+                    .frame(height: 100)
                 
                 Button(action: {}, label: {
                     Image(systemName: "pencil")
@@ -23,11 +25,14 @@ struct ProfileView: View {
                         .clipShape(Circle())
                         .shadow(radius: 6)
                 })
-                .padding(.vertical, 10)
+                .padding(.vertical, 0)
                 .offset(x: -10)
             }
             
             Spacer().frame(height: 18)
+            Group {
+                
+            
             
             Text("Bikram, 25")
                 .foregroundColor(.textTitle)
@@ -36,6 +41,7 @@ struct ProfileView: View {
             Spacer().frame(height: 8)
             
             Text("Software Engineer")
+            }
             
             Spacer().frame(height: 22)
             
@@ -104,6 +110,39 @@ struct ProfileView: View {
                     
                 
             }
+            Spacer().frame(height: 14)
+
+            HStack {
+                Text("Photo Tip: Make waves with a beach photo and get more likes")
+                    .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                    .lineLimit(3)
+                    .foregroundColor(.white)
+                    .font(.system(size: 14))
+                
+                Button(action: {}, label: {
+                    Image(systemName: "plus")
+                        .font(.system(size: 12, weight: .heavy))
+                        .foregroundColor(.pink)
+                        .padding(6)
+                    
+                }).background(Color.white)
+                
+                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+               
+            }
+            .padding()
+            .background(Color.pink)
+            .cornerRadius(12)
+            .padding(.horizontal, 8)
+            
+           
+            
+            ZStack {
+                Color.gray.opacity(0.15)
+                ProfileSwipePromo(){
+                    
+                }
+            }.padding(.top, 10)
             
             Spacer()
         }
@@ -112,8 +151,12 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
-            .background(Color.defaultBackground)
+        Group {
+            ProfileView()
+                .background(Color.defaultBackground)
+            ProfileView()
+                .background(Color.defaultBackground)
+        }
             
     }
 }
