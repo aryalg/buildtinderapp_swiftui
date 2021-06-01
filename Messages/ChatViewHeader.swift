@@ -29,7 +29,7 @@ struct ChatViewHeader: View {
                 
                 Spacer()
                 
-                VStack(spacing: 0) {
+                VStack(spacing: 6) {
                     RoundedImage(url: imageURL)
                         .frame(height: 50)
                     

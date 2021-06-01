@@ -17,6 +17,12 @@ class ChatManager: ObservableObject {
         loadMessages();
     }
     
+    public func sendMessage(_ message: Message) {
+        // Networking
+        messages.append(message)
+        // if networking failure, then so an error with some retry options
+    }
+    
     private func loadMessages() {
         messages = [Message.exampleSent, Message.exampleReceived]
         
