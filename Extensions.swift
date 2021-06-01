@@ -29,3 +29,9 @@ extension Color {
     static let defaultBackground = Color(.systemGray6).opacity(0.35)
     static let textFieldBG = Color(.systemGray6)
 }
+
+extension View {
+    func endEditing(_ force: Bool) {
+        UIApplication.shared.windows.forEach{$0.endEditing(force)}
+    }
+}
