@@ -18,7 +18,7 @@ struct MainView: View {
             let view = Text("Fire")
             return AnyView(view)
         case .star:
-           let view =  Text("Star")
+           let view =  MatchesView()
             return AnyView(view)
 
         case .message:
@@ -75,6 +75,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView().environmentObject(AppStateManager())
+            .environmentObject(UserManager())
     }
 }
 
