@@ -12,6 +12,8 @@ struct ChatView: View {
     
     @State private var typingMessage: String = ""
     
+    @State private var scrollProxy: ScrollViewProxy? = nil;
+    
     private var person: Person
     
     init(person: Person) {
@@ -24,13 +26,21 @@ struct ChatView: View {
             VStack {
                 Spacer().frame(height: 60)
                 ScrollView(.vertical, showsIndicators: true, content: {
-                    LazyVStack {
-                        ForEach(chatMsg.messages.indices, id: \.self) { index in
-                            let msg = chatMsg.messages[index]
-                            MessageView(message: msg)
-                                .animation(.easeIn)
-                                .transition(.move(edge: .trailing))
+                    
+                    ScrollViewReader { proxy in
+                        
+                        LazyVStack {
+                            ForEach(chatMsg.messages.indices, id: \.self) { index in
+                                let msg = chatMsg.messages[index]
+                                MessageView(message: msg)
+                                    .id(index)
+                                    
+                            }
                         }
+                        .onAppear(perform: {
+                            scrollProxy = proxy
+                            
+                        })
                     }
                 })
                 
@@ -65,11 +75,30 @@ struct ChatView: View {
         }
         .navigationTitle("")
         .navigationBarHidden(true)
+        .onChange(of: chatMsg.keyboardIsShowing, perform: { value in
+            if value {
+                // Scroll to the bottom
+                scrollToBottom()
+            } else {
+                //
+            }
+        })
+        .onChange(of: chatMsg.messages, perform: { _ in
+                scrollToBottom()
+        })
     }
     
     func sendMessage() {
         
         chatMsg.sendMessage(Message(content: typingMessage))
+        
+    }
+    
+    
+    func scrollToBottom() {
+        withAnimation {
+            scrollProxy?.scrollTo(chatMsg.messages.count - 1, anchor: .bottom)
+        }
         
     }
 }

@@ -8,7 +8,8 @@
 import Foundation
 
 
-struct Message {
+struct Message: Hashable {
+    
     var content: String
     var person: Person? = nil
     
