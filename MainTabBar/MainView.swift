@@ -22,7 +22,7 @@ struct MainView: View {
             return AnyView(view)
 
         case .message:
-            let view = Text("Message")
+            let view = MessageListView()
             return AnyView(view)
 
         case .profile:
@@ -33,38 +33,41 @@ struct MainView: View {
     }
     
     var body: some View {
-        ZStack {
-            Color(.systemGray6)
-                .opacity(0.35)
-                .edgesIgnoringSafeArea(.vertical)
-            
-            VStack {
-                HStack {
-                    Spacer()
-                    TabBarButtonView(type: .fire)
-                    Spacer()
-                    TabBarButtonView(type: .star)
-                    Spacer()
-                    TabBarButtonView(type: .message)
-                    Spacer()
-                    TabBarButtonView(type: .profile)
-                    Spacer()
+        NavigationView {
+            ZStack {
+                Color(.systemGray6)
+                    .opacity(0.35)
+                    .edgesIgnoringSafeArea(.vertical)
+                
+                VStack {
+                    HStack {
+                        Spacer()
+                        TabBarButtonView(type: .fire)
+                        Spacer()
+                        TabBarButtonView(type: .star)
+                        Spacer()
+                        TabBarButtonView(type: .message)
+                        Spacer()
+                        TabBarButtonView(type: .profile)
+                        Spacer()
+                        
+                        
+                        
+                    }
+                    .frame(height: 100)
+                    .padding(.top, 30)
+                    
+                    correctViewForState()
                     
                     
                     
+                    Spacer()
                 }
-                .frame(height: 100)
-                .padding(.top, 30)
+                .edgesIgnoringSafeArea(.vertical)
+               
                 
-                correctViewForState()
-                
-                
-                
-                Spacer()
             }
-            .edgesIgnoringSafeArea(.vertical)
-           
-            
+            .modifier(HideNavigationView())
         }
     }
 }
